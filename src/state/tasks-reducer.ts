@@ -61,6 +61,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
                 ...state, [action.todolistId]: []
             }
         case "REMOVE-TODOLIST":
+           // let {[action.id]: [], otherProperty} = {...state}
             let newState = {...state}
             delete newState[action.id]
             return newState
