@@ -52,7 +52,7 @@ function AppWithReducer() {
         dispatchToTasks(removeTaskAC(id, todolistId))
     }
 
-    function addTask(title: string, todolistId: string) {
+    const addTask = (title: string, todolistId: string) => {
         dispatchToTasks(addTaskAC(title, todolistId))
     }
 
@@ -80,11 +80,11 @@ function AppWithReducer() {
         dispatchToTodolist(action)
     }
 
-    const addTodolist = useCallback((title: string) => {
+    const addTodolist = (title: string) => {
         const action = AddTodolistAC(title)
         dispatchToTasks(action)
         dispatchToTodolist(action)
-    }, [])
+    }
 
     return (
         <div className="App">

@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -40,9 +40,9 @@ function AppWithRedux() {
         dispatch(removeTaskAC(id, todolistId))
     }
 
-    function addTask(title: string, todolistId: string) {
+    const addTask = useCallback((title: string, todolistId: string) => {
         dispatch(addTaskAC(title, todolistId))
-    }
+    },[dispatch])
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         dispatch(changeTaskStatusAC(id, isDone, todolistId))
@@ -67,10 +67,10 @@ function AppWithRedux() {
         dispatch(action)
     }
 
-    function addTodolist(title: string) {
+    const addTodolist = useCallback((title: string) => {
         const action = AddTodolistAC(title)
         dispatch(action)
-    }
+    },[dispatch])
 
     return (
         <div className="App">
