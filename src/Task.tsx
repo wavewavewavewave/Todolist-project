@@ -26,7 +26,7 @@ export const Task = React.memo(({task,removeTask, changeTaskStatus, changeTaskTi
     return <div key={task.id} className={task.isDone ? "is-done" : ""}>
         <Checkbox
             checked={task.isDone}
-            color="primary"
+            color = "primary"
             onChange={onChangeHandler}
         />
 
