@@ -11,8 +11,7 @@ import {
 import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from './state/tasks-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
-import {AppBar, Button, Container, Grid, IconButton,  Paper, Toolbar, Typography} from "@material-ui/core";
-import {Menu} from "@material-ui/icons";
+import {AppBar, Button, Container, Grid, IconButton, Menu, Paper, Toolbar, Typography} from "@material-ui/core";
 
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
@@ -78,7 +77,7 @@ function App() {
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu />
+                        {/*<Menu/>*/}
                     </IconButton>
                     <Typography variant="h6">
                         News
