@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
+import {todolistApi} from "../api/todolits-api";
+
 
 export default {
     title: 'API'
 }
-const settings = {
+ const settings = {
     withCredentials: true,
     headers: {
         'API-KEY': '911248f0-1866-498d-84bc-ce9553ace487'
@@ -14,8 +16,9 @@ const settings = {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings).then((res) => {
-            setState(res.data)
+        todolistApi.getTodos(settings).then((res) => {
+           const todos = res.data
+            setState(todos)
         })
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
@@ -27,7 +30,8 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: "newTodolist"}, settings).then((res) => {
+        let title = 'RRRRRRRRRRRRRRRRR'
+       todolistApi.createTodos(title, settings).then((res) => {
             setState(res.data)
         })
 
@@ -39,7 +43,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistId = '9cc67643-8dcd-4b86-a886-4ffd37b789d9'
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, settings).then((res) => {
+      todolistApi.deleteTodos(todolistId, settings).then((res) => {
             setState(res.data)
         })
     }, [])
@@ -49,8 +53,9 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '9cc67643-8dcd-4b86-a886-4ffd37b789d9'
-        axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title: 'RRRRRR'}, settings).then((res) => {
+        const todolistId = 'ff1352e0-aa4b-4665-998d-ba1d2e7359fc'
+        const title = '12345'
+       todolistApi.updateTodolist(todolistId, settings, title).then((res) => {
             setState(res.data)
         })
     }, [])
