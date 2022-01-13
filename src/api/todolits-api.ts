@@ -7,6 +7,35 @@ type SettingsType = {
 type HeadersType = {
     'API-KEY': string
 }
+type ToDoType = {
+    id: string
+    addedDate: string
+    order: number
+    title: string
+}
+type CreateToDoType = {
+    data: {
+        item: ToDoType
+    }
+    fieldsErrors: string []
+    messages: string []
+    resultCode: number
+}
+type DeleteToDoType = {
+    data: {}
+    fieldsErrors: string []
+    messages: string []
+    resultCode: number
+}
+type UpdateToDoType = {
+    data: {}
+    fieldsErrors: string []
+    messages: string []
+    resultCode: number
+}
+
+
+
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -18,19 +47,19 @@ const instance = axios.create({
 
 export const todolistApi = {
     getTodos() {
-        return instance.get('todo-lists')
+        return instance.get<Array<ToDoType>>('todo-lists')
     },
 
     createTodos(title: string) {
-        return instance.post('todo-lists', {title})
+        return instance.post<CreateToDoType>('todo-lists', {title})
     },
 
     deleteTodos(todolistId: string) {
-        return instance.delete(`todo-lists/${todolistId}`)
+        return instance.delete<DeleteToDoType>(`todo-lists/${todolistId}`)
     },
 
-    updateTodolist(todolistId: string, title: string) {
-        return instance.put(`todo-lists/${todolistId}`, {title})
+    updateTodolist(params: {todolistId: string, title: string}) {
+        return instance.put<UpdateToDoType>(`todo-lists/${params.todolistId}`, {title: params.title})
     }
 
 }
