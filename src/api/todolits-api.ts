@@ -8,26 +8,29 @@ type HeadersType = {
     'API-KEY': string
 }
 
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    withCredentials: true,
+    headers: {
+        'API-KEY': '911248f0-1866-498d-84bc-ce9553ace487'
+    }
+})
 
 export const todolistApi = {
-    getTodos(settings: SettingsType) {
-        let promise = axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings)
-        return promise
+    getTodos() {
+        return instance.get('todo-lists')
     },
 
-    createTodos(title: string, settings: SettingsType) {
-        let promise = axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings)
-        return promise
+    createTodos(title: string) {
+        return instance.post('todo-lists', {title})
     },
 
-    deleteTodos(todolistId: string, settings: SettingsType) {
-        let promise = axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, settings)
-        return promise
+    deleteTodos(todolistId: string) {
+        return instance.delete(`todo-lists/${todolistId}`)
     },
 
-    updateTodolist(todolistId: string, settings: SettingsType, title: string) {
-        let promise = axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title} ,settings)
-        return promise
+    updateTodolist(todolistId: string, title: string) {
+        return instance.put(`todo-lists/${todolistId}`, {title})
     }
 
 }
