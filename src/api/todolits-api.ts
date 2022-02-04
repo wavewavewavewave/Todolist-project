@@ -34,6 +34,13 @@ type UpdateToDoType = {
     resultCode: number
 }
 
+type ResponseType<T = {} > = {
+    fieldsErrors: string []
+    messages: string []
+    resultCode: number
+    data: T
+}
+
 
 
 
@@ -47,19 +54,19 @@ const instance = axios.create({
 
 export const todolistApi = {
     getTodos() {
-        return instance.get<Array<ToDoType>>('todo-lists')
+        return instance.get<ToDoType[]>('todo-lists')
     },
 
     createTodos(title: string) {
-        return instance.post<CreateToDoType>('todo-lists', {title})
+        return instance.post<ResponseType<{ item: ToDoType }>>('todo-lists', {title})
     },
 
     deleteTodos(todolistId: string) {
-        return instance.delete<DeleteToDoType>(`todo-lists/${todolistId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}`)
     },
 
     updateTodolist(params: {todolistId: string, title: string}) {
-        return instance.put<UpdateToDoType>(`todo-lists/${params.todolistId}`, {title: params.title})
+        return instance.put<ResponseType>(`todo-lists/${params.todolistId}`, {title: params.title})
     }
 
 }
