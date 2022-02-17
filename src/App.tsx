@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import './App.css';
 import { Todolist } from './Todolist';
 import { AddItemForm } from './AddItemForm';
-
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -23,8 +23,6 @@ import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from '
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
 import { TaskStatuses, TaskType } from './api/todolists-api'
-import {AppBar} from "@mui/material";
-
 
 
 export type TasksStateType = {
