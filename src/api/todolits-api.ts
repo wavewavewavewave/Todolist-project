@@ -7,11 +7,11 @@ type SettingsType = {
 type HeadersType = {
     'API-KEY': string
 }
-type ToDoType = {
-    id: string
-    addedDate: string
-    order: number
-    title: string
+export type ToDoType = {
+    id: string,
+    addedDate: string,
+    order: number,
+    title: string,
 }
 type CreateToDoType = {
     data: {
@@ -45,7 +45,7 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
-        'API-KEY': '911248f0-1866-498d-84bc-ce9553ace487'
+        'API-KEY': '85c458b3-9464-4beb-9450-5ce13a35aab2'
     }
 })
 
