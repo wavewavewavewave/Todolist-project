@@ -33,12 +33,7 @@ export type TasksStateType = {
 function App() {
 
     useEffect(() => {
-        let promise = todolistsAPI.getTodolists()
-        promise.then((res) => {
-            debugger
-            let todos = res.data
-            dispatch(setTodosAC(todos))
-        })
+
     }, [])
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
