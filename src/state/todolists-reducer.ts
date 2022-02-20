@@ -99,16 +99,16 @@ export const setTodosAC = (todolists: TodolistType[]) => {
 }
 
 //THUNK
-export const setTodosThunk = (dispatch: Dispatch, getState: () => AppRootStateType) => {
+export const setTodosTC = () => {
     //1. side effects
-    todolistsAPI.getTodolists()
-        .then((res) => {
-            debugger
-            let todos = res.data
-            //2. dispatch action (thunk)
-            dispatch(setTodosAC(todos))
-        })
-
-
+    return (dispatch: Dispatch) => {
+        todolistsAPI.getTodolists()
+            .then((res) => {
+                debugger
+                let todos = res.data
+                //2. dispatch action (thunk)
+                dispatch(setTodosAC(todos))
+            })
+    }
 }
 
