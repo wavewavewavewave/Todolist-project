@@ -2,7 +2,7 @@ import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType}
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../../app/store'
-import {AppReducerACType, setAppStatusReducerAC} from "../../app/app-reducer";
+import {setAppStatusReducerAC} from "../../app/app-reducer";
 
 const initialState: TasksStateType = {}
 
@@ -86,10 +86,8 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
         if (!task) {
             //throw new Error("task not found in the state");
             console.warn('task not found in the state')
-            dispatch(setAppStatusReducerAC('succeeded'))
             return
         }
-
         const apiModel: UpdateTaskModelType = {
             deadline: task.deadline,
             description: task.description,
@@ -104,6 +102,7 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
             .then(res => {
                 const action = updateTaskAC(taskId, domainModel, todolistId)
                 dispatch(action)
+                dispatch(setAppStatusReducerAC('succeeded'))
             })
     }
 
@@ -127,4 +126,4 @@ type ActionsType =
     | RemoveTodolistActionType
     | SetTodolistsActionType
     | ReturnType<typeof setTasksAC>
-    | AppReducerACType
+    | ReturnType<typeof setAppStatusReducerAC>
