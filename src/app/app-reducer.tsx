@@ -4,7 +4,7 @@ export type NullableType<T> = null | T
 
 const initialState = {
     status: 'loading' as RequestStatusType,
-    error: 'ERROR !!!' as string | NullableType<string>
+    error: null as string | NullableType<string>
 }
 
 type InitialStateType = typeof initialState
