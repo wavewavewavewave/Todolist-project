@@ -8,6 +8,8 @@ import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelTyp
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../../app/store'
 import {setAppErrorAC, SetAppErrorACType, setAppStatusReducerAC} from "../../app/app-reducer";
+import {AxiosError} from "axios";
+import {handleServerNetworkError} from "../../utils/error-utils";
 
 const initialState: TasksStateType = {}
 
@@ -73,6 +75,14 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: D
             dispatch(setAppStatusReducerAC('succeeded'))
         })
 }
+
+enum ResponseStatuses {
+    'seccess' = 0,
+    'error' = 1,
+    'captcha' = 9,
+
+}
+
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusReducerAC('loading'))
     todolistsAPI.createTask(todolistId, title)
@@ -88,7 +98,9 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
                 }
                 dispatch(setAppStatusReducerAC('failed'))
             }
-        })
+        }).catch((err: AxiosError) => {
+        handleServerNetworkError(dispatch, err.message)
+    })
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
     (dispatch: Dispatch<ActionsType>, getState: () => AppRootStateType) => {
