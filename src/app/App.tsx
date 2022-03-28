@@ -17,6 +17,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import {Login} from "../features/Login/Login";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             {status === 'loading' && <LinearProgress color="secondary"/>}
             <Container fixed>
                 <TodolistsList/>
+                <Login/>
             </Container>
             <ErrorSnackbar />
         </div>
