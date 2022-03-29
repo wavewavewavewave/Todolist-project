@@ -17,8 +17,6 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {Login} from "../features/Login/Login";
-import {Route, Routes} from "react-router-dom";
 
 
 function App() {
@@ -40,12 +38,9 @@ function App() {
             </AppBar>
             {status === 'loading' && <LinearProgress color="secondary"/>}
             <Container fixed>
-                <Routes>
-                    <Route path='/' element={<TodolistsList/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                </Routes>
+                <TodolistsList/>
             </Container>
-            <ErrorSnackbar/>
+            <ErrorSnackbar />
         </div>
     )
 }
