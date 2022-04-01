@@ -22,10 +22,9 @@ export const Login = () => {
         },
     })
 
-
-
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
+            <form onSubmit={formik.handleSubmit}/>
             <FormControl>
                 <FormLabel>
                     <p>To log in get registered
@@ -38,11 +37,22 @@ export const Login = () => {
                     <p>Password: free</p>
                 </FormLabel>
                 <FormGroup>
-                    <TextField label="Email" margin="normal"/>
-                    <TextField type="password" label="Password"
+                    <TextField label="Email"
                                margin="normal"
+                               name="email"
+                               onChange={formik.handleChange}
+                               value={formik.values.email}/>
+                    <TextField type="password"
+                               label="Password"
+                               margin="normal"
+                               name="password"
+                               onChange={formik.handleChange}
+                               value={formik.values.password}
                     />
-                    <FormControlLabel label={'Remember me'} control={<Checkbox/>}/>
+                    <FormControlLabel label={'Remember me'} control={
+                        <Checkbox onChange={formik.handleChange}
+                                  checked={formik.values.rememberMe}
+                                  name="rememberMe"/>}/>
                     <Button type={'submit'} variant={'contained'} color={'primary'}>
                         Login
                     </Button>
