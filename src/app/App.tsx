@@ -22,11 +22,16 @@ type PropsType = {
 
 function App({demo = false}: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+    const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
+
+    if (!isInitialized) {
+        return <h1>Loading...</h1>
+    }
 
     return (
         <div className="App">
