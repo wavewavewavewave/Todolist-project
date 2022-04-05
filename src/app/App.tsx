@@ -15,6 +15,7 @@ import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
+import {CircularProgress} from "@mui/material";
 
 type PropsType = {
     demo?: boolean
@@ -30,7 +31,10 @@ function App({demo = false}: PropsType) {
     }, [])
 
     if (!isInitialized) {
-        return <h1>Loading...</h1>
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
     }
 
     return (
